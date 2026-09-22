@@ -9,6 +9,7 @@ An AI-powered medical assistant built with Python and Streamlit.
 
 ## How to Run
 pip install -r requirements.txt 
+
 python -m streamlit run app.py
 
 ## Tech Used
