@@ -2,3 +2,5 @@ streamlit
 gtts
 pandas
 pillow
+speechRecognition
+pydub
