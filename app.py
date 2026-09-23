@@ -18,7 +18,7 @@ if feature == "AI Doctor Chat":
     q = st.chat_input("Type your symptom in English... Ex: I have fever")
     if q:
         st.chat_message("user").write(q)
-        if "fever" in q.lower():
+ if "fever" in q.lower():
            st.chat_message("assistant").write("🤒 **FEVER:**\n🩺 Rest, water, cold cloth on forehead\n💊 Dolo 650 after food\n🥗 Khichdi, coconut water\n⚠️ Avoid cold drinks")
     elif "cold" in q.lower():
            st.chat_message("assistant").write("🤧 **COLD:**\n🩺 Steam 2 times, keep warm\n💊 Cetzine, Vicks\n🥗 Hot soup, ginger tea\n⚠️ Avoid ice cream, cold water")
