@@ -16,20 +16,20 @@ feature = st.sidebar.selectbox(
 if feature == "AI Doctor Chat":
     st.subheader("Chat with AI Doctor")
     q = st.chat_input("Type your symptom in English... Ex: I have fever")
-    if q:
+       if q:
         st.chat_message("user").write(q)
- if "fever" in q.lower():
-           st.chat_message("assistant").write("🤒 **FEVER:**\n🩺 Rest, water, cold cloth on forehead\n💊 Dolo 650 after food\n🥗 Khichdi, coconut water\n⚠️ Avoid cold drinks")
-    elif "cold" in q.lower():
-           st.chat_message("assistant").write("🤧 **COLD:**\n🩺 Steam 2 times, keep warm\n💊 Cetzine, Vicks\n🥗 Hot soup, ginger tea\n⚠️ Avoid ice cream, cold water")
-    elif "headache" in q.lower():
-           st.chat_message("assistant").write("🤕 **HEADACHE:**\n🩺 Sleep well, no phone, dark room\n💊 Paracetamol, head massage\n🥗 Water, banana\n⚠️ Avoid stress, loud sound")
-    elif "stomach" in q.lower() or "pain" in q.lower():
-           st.chat_message("assistant").write("🤢 **STOMACH PAIN:**\n🩺 No spicy, jeera water\n💊 Digene, Eno\n🥗 Curd rice, banana\n⚠️ Avoid oily, junk food")
-    elif "cough" in q.lower():
-           st.chat_message("assistant").write("😮‍💨 **COUGH:**\n🩺 Salt water gargle, wear mask\n💊 Honey+ginger, cough syrup\n🥗 Warm water, tulsi tea\n⚠️ Avoid dust, smoke")
-    else:
-           st.chat_message("assistant").write(f"For '{q}': Take rest and drink plenty of water. If severe, visit Tiruvuru Govt Hospital.")   
+        if "fever" in q.lower():
+            st.chat_message("assistant").write("🤒 **FEVER:** Rest, water, cold cloth on forehead")
+        elif "cold" in q.lower():
+            st.chat_message("assistant").write("🤧 **COLD:** Steam 2 times, keep warm")
+        elif "headache" in q.lower():
+            st.chat_message("assistant").write("🤕 **HEADACHE:** Sleep well, no phone")
+        elif "stomach" in q.lower() or "pain" in q.lower():
+            st.chat_message("assistant").write("🤢 **STOMACH PAIN:** No spicy, jeera water")
+        elif "cough" in q.lower():
+            st.chat_message("assistant").write("😮‍💨 **COUGH:** Salt water gargle")
+        else:
+            st.chat_message("assistant").write(f"For '{q}': Take rest, drink water. Visit Tiruvuru Govt Hospital if severe.")
     # DOWNLOAD BUTTON ALWAYS VISIBLE - ENGLISH
     st.write("---")
     report_text = f"Medical Assistant - Tiruvuru\nDate: {datetime.now()}\nSymptom: {q if 'q' in locals() and q else 'General Consultation'}\nAdvice: Rest, Hydration, Consult Doctor\nLocation: Tiruvuru, NTR District"
