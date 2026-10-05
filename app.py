@@ -1,7 +1,6 @@
 import streamlit as st, base64
 from PIL import Image
 from gtts import gTTS
-from pydub import AudioSegment
 
 st.set_page_config(page_title="AI MEDICAL ASSISTANT", layout="wide")
 
@@ -9,15 +8,24 @@ st.markdown("<h1 style='text-align:center;'>🩺 AI MEDICAL ASSISTANT 🌈</h1><
 
 def speak_sequential(te_text, hi_text, en_text):
     try:
-        gTTS(text=te_text, lang='te', slow=False).save("te.mp3")
-        gTTS(text=hi_text, lang='hi', slow=False).save("hi.mp3")
-        gTTS(text=en_text, lang='en', slow=False).save("en.mp3")
-        combined = AudioSegment.from_mp3("te.mp3") + AudioSegment.silent(duration=700) + AudioSegment.from_mp3("hi.mp3") + AudioSegment.silent(duration=700) + AudioSegment.from_mp3("en.mp3")
-        combined.export("final.mp3", format="mp3")
-        with open("final.mp3","rb") as f:
-            b64 = base64.b64encode(f.read()).decode()
-            st.markdown(f"<p style='text-align:center;'>🎧 <b>Sequential Voice - Telugu -> Hindi -> English</b></p><audio controls autoplay style='width:100%'><source src='data:audio/mp3;base64,{b64}' type='audio/mp3'></audio>", unsafe_allow_html=True)
-    except: st.warning("Voice loading...")
+        # Telugu
+        tts_te = gTTS(text=te_text, lang='te', slow=False)
+        tts_te.save("te.mp3")
+        # Hindi
+        tts_hi = gTTS(text=hi_text, lang='hi', slow=False)
+        tts_hi.save("hi.mp3")
+        # English
+        tts_en = gTTS(text=en_text, lang='en', slow=False)
+        tts_en.save("en.mp3")
+
+        # Play one by one - No pydub needed, so no ffmpeg error!
+        st.markdown("<p style='text-align:center'>🎧 <b>Okati tharvatha okati vinandi - Telugu -> Hindi -> English</b></p>", unsafe_allow_html=True)
+        st.audio("te.mp3", format="audio/mp3")
+        st.audio("hi.mp3", format="audio/mp3")
+        st.audio("en.mp3", format="audio/mp3")
+        
+    except Exception as e:
+        st.error(f"Voice Error: {e}. Internet check chey, gTTS ki net kavali.")
 
 # Native script DB - No emojis inside
 SYMPTOMS_DB = {
