@@ -24,7 +24,7 @@ st.markdown("""
     margin:10px;
 }
 </style>
-<div class='main-title'>🏥 AI Medical Assistant App - Tiruvuru Govt Hospital</div>
+<div class='main-title'>🏥 AI Medical Assistant</div>
 """, unsafe_allow_html=True)
 
 def speak_single(text, lang_code):
@@ -81,7 +81,7 @@ def get_reply(q):
         if k in ql: return SYMPTOMS_DB[k]["en"], SYMPTOMS_DB[k]["te"], SYMPTOMS_DB[k]["hi"]
     if "jwaram" in ql: return SYMPTOMS_DB["fever"]["en"], SYMPTOMS_DB["fever"]["te"], SYMPTOMS_DB["fever"]["hi"]
     if "kadupu" in ql: return SYMPTOMS_DB["stomach pain"]["en"], SYMPTOMS_DB["stomach pain"]["te"], SYMPTOMS_DB["stomach pain"]["hi"]
-    return (f"For {q}: Rest, 3L water, 8h sleep, light food. Precautions: No cold, oily, spicy, outside food, mask, wash hands. If 2 days no relief visit Tiruvuru Govt Hospital garu.",
+    return (f"For {q}: Rest, 3L water, 8h sleep, light food. Precautions: No cold, oily, spicy, outside food, mask, wash hands. If 2 days no relief visit Tiruvuru Govt Hospital.",
             f"{q} kosam garu: Vishranti, 3L neeru, 8 gantalu nidra, light food. Jagrathalu: Challa, noone, karam, bayata food vaddu, mask, chethulu kadukkondi. 2 rojula tharvata hospital ki randi.",
             f"{q} ke liye: Aaram, 3L pani, 8h neend. Precautions: Thanda, tel masala avoid, mask, haath dho. 2 din me nahi to hospital.")
 
@@ -111,7 +111,7 @@ if feature == "🩺 AI Doctor Chat":
                 if lang=='te': st.info(tel); speak_single(tel,'te')
                 elif lang=='hi': st.info(hin); speak_single(hin,'hi')
                 else: st.info(eng); speak_single(eng,'en')
-            except: st.warning("Malli okasari cheppandi garu.")
+            except: st.warning("Malli okasari cheppandi.")
     with col2:
         st.markdown("<div class='beauty-card'><h3 style='text-align:center; color:#92FE9D;'>⌨️ Type Here</h3><p style='text-align:center; color:#AAA;'>Type symptoms in any language</p></div>", unsafe_allow_html=True)
         q = st.chat_input("Enter symptoms... jwaram / fever")
@@ -129,16 +129,16 @@ elif feature == "💊 Medicine Info & Diet":
     <div class='beauty-card' style='margin-top:15px; border-color:#92FE9D;'>
         <h3 style='text-align:center; color:#92FE9D;'>🥗 Diet Plan - Thine Vishayam</h3>
         <p style='font-size:14px; line-height:1.8;'>
-        Namaste garu, thine vishayam lo koncham jagratha ga undandi.<br><br>
+        Namaste, thine vishayam lo koncham jagratha ga undandi.<br><br>
         <b>Thinalsi vishayalu:</b><br>
         - Udayam: Goruvecchi neeru + 2 kela / papaya / apple<br>
         - Madhyanam: Annam + pappu + perugu, koncham thakkuva uppu tho<br>
         - Sayantram: Kobbari neeru / fruit juice (no ice)<br>
-        - Rathri: 2 chapati + light curry, 9 lopu thineyandi garu<br><br>
-        <b>Thinakudadani vishayalu garu:</b><br>
+        - Rathri: 2 chapati + light curry, 9 lopu thineyandi<br><br>
+        <b>Thinakudadani vishayalu:</b><br>
         - Bayata fry, biryani, cool drinks, ekkuva karam, maida - 5 rojulu vaddu.<br>
         - Tea, coffee roju ki 1-2 sarlu chalu, ekkuva vaddhu.<br><br>
-        Light ga tintu unte kadupu kuda happy ga untundi garu, thondaraga thagguthundi.
+        Light ga tintu unte kadupu kuda happy ga untundi, thondaraga thagguthundi.
         </p>
     </div>
     """, unsafe_allow_html=True)
@@ -148,16 +148,16 @@ elif feature == "🧘 Health Tips & Yoga":
     <div class='beauty-card'>
         <h3 style='text-align:center; color:#00C9FF;'>🧘 Daily Health Tips - Manchi Aarogyam Kosam</h3>
         <p style='font-size:14px; line-height:1.9;'>
-        Namaste garu, rojulo konni chinna jagrathalu teesukunte chalu, aarogyam bavuntundi.<br><br>
-        <b>1. Morning Walk:</b> Roju 30 nimishalu walk cheyandi garu, body active ga untundi, blood circulation bavuntundi.<br>
-        <b>2. Yoga & Breathing:</b> 15 nimishalu yoga, deep breath cheyandi, stress, tension thagguthundi garu.<br>
-        <b>3. Water:</b> Roju 3 liters neeru thappakunda tagandi garu, body clean avuthundi, jwaram kuda thondaraga thagguthundi.<br>
-        <b>4. Sleep:</b> 8 gantalu nidra chala mukhyam garu, phone pakkana petti, chikati gadi lo padukondi.<br>
-        <b>5. Food Time:</b> Time ki tinali garu, night 9 lopu thineyandi, light ga tintu unte aarogyam.<br>
-        <b>6. Clean Habits:</b> Thine mundhu chethulu kadukkondi garu, dust lo unte mask pettukondi.<br>
-        <b>7. No Bad Habits:</b> Smoking, alcohol vaddu garu, avi aarogyaniki manchidi kadu ani meeku telusu.<br>
-        <b>8. Happy Mind:</b> Chinna vishayalaki tension padakandi garu, koncham music vini, friends tho matladandi.<br><br>
-        Mee aarogyam me chethilo undi garu, jagratha ga undandi. Edaina doubt unte Tiruvuru Govt Hospital ki randi.
+        Namaste, rojulo konni chinna jagrathalu teesukunte chalu, aarogyam bavuntundi.<br><br>
+        <b>1. Morning Walk:</b> Roju 30 nimishalu walk cheyandi, body active ga untundi, blood circulation bavuntundi.<br>
+        <b>2. Yoga & Breathing:</b> 15 nimishalu yoga, deep breath cheyandi, stress, tension thagguthundi.<br>
+        <b>3. Water:</b> Roju 3 liters neeru thappakunda tagandi, body clean avuthundi, jwaram kuda thondaraga thagguthundi.<br>
+        <b>4. Sleep:</b> 8 gantalu nidra chala mukhyam, phone pakkana petti, chikati gadi lo padukondi.<br>
+        <b>5. Food Time:</b> Time ki tinali, night 9 lopu thineyandi, light ga tintu unte aarogyam.<br>
+        <b>6. Clean Habits:</b> Thine mundhu chethulu kadukkondi, dust lo unte mask pettukondi.<br>
+        <b>7. No Bad Habits:</b> Smoking, alcohol vaddu, avi aarogyaniki manchidi kadu ani meeku telusu.<br>
+        <b>8. Happy Mind:</b> Chinna vishayalaki tension padakandi, koncham music vini, friends tho matladandi.<br><br>
+        Mee aarogyam me chethilo undi, jagratha ga undandi. Edaina doubt unte Tiruvuru Govt Hospital ki randi.
         </p>
     </div>
     """, unsafe_allow_html=True)
@@ -170,4 +170,4 @@ elif feature == "📸 Image Analyzer":
     img = st.file_uploader("Upload image", type=["jpg","png","jpeg"])
     if img:
         st.image(Image.open(img), use_column_width=True)
-        st.warning("Gayamu unte Dettol tho kadigi Betadine rayandi garu. Vapu, pus, ekkuva noppi unte ventane Tiruvuru Hospital ki randi.")
+        st.warning("Gayamu unte Dettol tho kadigi Betadine rayandi. Vapu, pus, ekkuva noppi unte ventane Tiruvuru Hospital ki randi.")
