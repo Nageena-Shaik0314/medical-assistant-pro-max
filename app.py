@@ -159,18 +159,52 @@ st.success("Light ga tintu unte kadupu happy / Light food keeps stomach happy / 
 elif feature == "🧘 Health Tips & Yoga":
     st.markdown("""
     <div class='beauty-card'>
-        <h3 style='text-align:center; color:#00C9FF;'>🧘 Daily Health Tips - Manchi Aarogyam Kosam</h3>
-        <p style='font-size:14px; line-height:1.9;'>
-        Namaste, rojulo konni chinna jagrathalu teesukunte chalu, aarogyam bavuntundi.<br><br>
-        <b>1. Morning Walk:</b> Roju 30 nimishalu walk cheyandi, body active ga untundi, blood circulation bavuntundi.<br>
-        <b>2. Yoga & Breathing:</b> 15 nimishalu yoga, deep breath cheyandi, stress, tension thagguthundi.<br>
-        <b>3. Water:</b> Roju 3 liters neeru thappakunda tagandi, body clean avuthundi, jwaram kuda thondaraga thagguthundi.<br>
-        <b>4. Sleep:</b> 8 gantalu nidra chala mukhyam, phone pakkana petti, chikati gadi lo padukondi.<br>
-        <b>5. Food Time:</b> Time ki tinali, night 9 lopu thineyandi, light ga tintu unte aarogyam.<br>
-        <b>6. Clean Habits:</b> Thine mundhu chethulu kadukkondi, dust lo unte mask pettukondi.<br>
-        <b>7. No Bad Habits:</b> Smoking, alcohol vaddu, avi aarogyaniki manchidi kadu ani meeku telusu.<br>
-        <b>8. Happy Mind:</b> Chinna vishayalaki tension padakandi, koncham music vini, friends tho matladandi.<br><br>
-        Mee aarogyam me chethilo undi, jagratha ga undandi. Edaina doubt unte Tiruvuru Govt Hospital ki randi.
+        st.markdown("### 🧘 Daily Health Tips - మంచి ఆరోగ్యం కోసం / अच्छे स्वास्थ्य के लिए")
+
+health_tips = """
+**1. Morning Walk / ఉదయం నడక / सुबह की सैर:**
+- Roju 30 nimishalu walk cheyandi, body active ga untundi
+- 30 min walk daily, keeps body active & blood circulation
+- रोज 30 मिनट टहलें, शरीर सक्रिय रहता है
+
+**2. Yoga & Breathing / యోగా / योग:**
+- 15 nimishalu yoga, deep breath, stress thagguthundi
+- 15 min yoga & deep breathing reduces stress
+- 15 मिनट योग और गहरी सांस, तनाव कम होता है
+
+**3. Water / నీరు / पानी:**
+- Roju 3 liters neeru thappakunda tagandi
+- Drink 3 liters water daily, body clean avuthundi
+- रोज 3 लीटर पानी पिएं, शरीर साफ रहता है
+
+**4. Sleep / నిద్ర / नींद:**
+- 8 gantalu nidra chala mukhyam
+- 8 hours sleep is very important
+- 8 घंटे की नींद बहुत जरूरी है
+
+**5. Food Time / భోజన సమయం / खाने का समय:**
+- Time ki tinali, 9 lopu thineyandi
+- Eat on time, before 9pm, light food
+- समय पर खाएं, 9 बजे से पहले, हल्का खाना
+
+**6. Clean Habits / శుభ్రత / स्वच्छता:**
+- Thine mundhu chethulu kadukkondi
+- Wash hands before eating, wear mask in dust
+- खाने से पहले हाथ धोएं, धूल में मास्क पहनें
+
+**7. No Bad Habits / చెడు అలవాట్లు వద్దు / बुरी आदतें नहीं:**
+- Smoking, alcohol vaddu
+- No smoking, no alcohol - not good for health
+- धूम्रपान, शराब नहीं - स्वास्थ्य के लिए हानिकारक
+
+**8. Happy Mind / సంతోషంగా ఉండండి / खुश रहें:**
+- Tension padakandi, music vini, friends tho matladandi
+- Don't take tension, listen to music, talk to friends
+- टेंशन न लें, संगीत सुनें, दोस्तों से बात करें
+"""
+
+st.markdown(health_tips)
+st.info("Mee aarogyam me chethilo undi / Your health is in your hands / आपका स्वास्थ्य आपके हाथ में है")
         </p>
     </div>
     """, unsafe_allow_html=True)
