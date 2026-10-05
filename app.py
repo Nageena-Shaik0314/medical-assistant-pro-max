@@ -125,90 +125,38 @@ if feature == "🩺 AI Doctor Chat":
 
 elif feature == "💊 Medicine Info & Diet":
     st.markdown("<div class='beauty-card'><h3 style='text-align:center; color:#00C9FF;'>💊 Medicine Info</h3><p>Dolo 650 - Fever, headache - After food<br>Cetzine - Cold allergy - Night 1<br>Gelusil - Gas acidity - After food<br>Cyclopam - Stomach cramp - After food<br>Vomikind 4mg - Vomiting - Under tongue<br>ORS - 1 pkt in 1L water<br>Pan 40 - Morning empty stomach<br><br><i>Note garu: Doctor ni adigi vesukondi.</i></p></div>", unsafe_allow_html=True)
+    elif feature == "🍎 Diet Plan":
     st.markdown("""
-    <div class='beauty-card' style='margin-top:15px; border-color:#92FE9D;'>
-st.markdown("### 🥗 Diet Plan / ఆహార ప్రణాళిక / आहार योजना")
-
-st.markdown("""
-** Udayam / Morning / सुबह:**
-- Goruvecchi neeru + 2 kela
-- Luke warm water + 2 banana
-- गुनगुना पानी + 2 केले
-
-** Madhyanam / Afternoon / दोपहर:**
-- Annam + pappu + perugu, thakkuva uppu
-- Rice + dal + curd, less salt
-- चावल + दाल + दही, कम नमक
-
-** Rathri / Night / रात:**
-- 2 chapati + light curry, 9 lopu thineyandi
-- 2 chapati + light curry, before 9pm
-- 2 चपाती + हल्की सब्जी, 9 बजे से पहले
-
-** Avoid / నివారించండి / बचें:**
-- Bayata fry, biryani, cool drinks - 5 rojulu vaddu
-- Avoid outside fry, biryani, cool drinks for 5 days
-- बाहर का तला, बिरयानी, कोल्ड ड्रिंक 5 दिन तक नहीं
-""")
-
-st.success("Light ga tintu unte kadupu happy / Light food keeps stomach happy / हल्का खाना पेट को खुश रखता है")
-        </p>
+    <div class='beauty-card' style='border-left:5px solid #92FE9D;'>
+    <h3 style='text-align:center; color:#92FE9D;'>Diet Plan - Aahar Yojana</h3>
+    <p style='color:white; font-size:14px; line-height:1.8;'>
+    <b>Udayam / Morning / सुबह:</b> Goruvecchi neeru + rendu kela / Lukewarm water + two bananas / गुनगुना पानी + दो केले<br>
+    <b>Madhyanam / Afternoon / दोपहर:</b> Annam + pappu + perugu / Rice + dal + curd / चावल + दाल + दही<br>
+    <b>Sayantram / Evening / शाम:</b> Kobbari neeru / Coconut water / नारियल पानी<br>
+    <b>Rathri / Night / रात:</b> Rendu chapati + light curry / Two chapati + light curry / दो चपाती + हल्की सब्जी<br><br>
+    <b>Vaddu / Avoid / परहेज:</b> Bayata fry biryani vaddu / Avoid outside fry biryani / बाहर का तला भुना न खाएं<br>
+    Light food keeps stomach happy / हल्का खाना पेट को खुश रखता है / లైట్ గా తింటే కడుపు హ్యాపీ
+    </p>
     </div>
     """, unsafe_allow_html=True)
 
 elif feature == "🧘 Health Tips & Yoga":
     st.markdown("""
-    <div class='beauty-card'>
-        st.markdown("### 🧘 Daily Health Tips - మంచి ఆరోగ్యం కోసం / अच्छे स्वास्थ्य के लिए")
-
-health_tips = """
-**1. Morning Walk / ఉదయం నడక / सुबह की सैर:**
-- Roju 30 nimishalu walk cheyandi, body active ga untundi
-- 30 min walk daily, keeps body active & blood circulation
-- रोज 30 मिनट टहलें, शरीर सक्रिय रहता है
-
-**2. Yoga & Breathing / యోగా / योग:**
-- 15 nimishalu yoga, deep breath, stress thagguthundi
-- 15 min yoga & deep breathing reduces stress
-- 15 मिनट योग और गहरी सांस, तनाव कम होता है
-
-**3. Water / నీరు / पानी:**
-- Roju 3 liters neeru thappakunda tagandi
-- Drink 3 liters water daily, body clean avuthundi
-- रोज 3 लीटर पानी पिएं, शरीर साफ रहता है
-
-**4. Sleep / నిద్ర / नींद:**
-- 8 gantalu nidra chala mukhyam
-- 8 hours sleep is very important
-- 8 घंटे की नींद बहुत जरूरी है
-
-**5. Food Time / భోజన సమయం / खाने का समय:**
-- Time ki tinali, 9 lopu thineyandi
-- Eat on time, before 9pm, light food
-- समय पर खाएं, 9 बजे से पहले, हल्का खाना
-
-**6. Clean Habits / శుభ్రత / स्वच्छता:**
-- Thine mundhu chethulu kadukkondi
-- Wash hands before eating, wear mask in dust
-- खाने से पहले हाथ धोएं, धूल में मास्क पहनें
-
-**7. No Bad Habits / చెడు అలవాట్లు వద్దు / बुरी आदतें नहीं:**
-- Smoking, alcohol vaddu
-- No smoking, no alcohol - not good for health
-- धूम्रपान, शराब नहीं - स्वास्थ्य के लिए हानिकारक
-
-**8. Happy Mind / సంతోషంగా ఉండండి / खुश रहें:**
-- Tension padakandi, music vini, friends tho matladandi
-- Don't take tension, listen to music, talk to friends
-- टेंशन न लें, संगीत सुनें, दोस्तों से बात करें
-"""
-
-st.markdown(health_tips)
-st.info("Mee aarogyam me chethilo undi / Your health is in your hands / आपका स्वास्थ्य आपके हाथ में है")
-        </p>
+    <div class='beauty-card' style='margin-top:15px; border-left:5px solid #00E5FF;'>
+    <h3 style='text-align:center; color:#00E5FF;'>Health Tips - Aarogyam - स्वास्थ्य</h3>
+    <p style='color:white; font-size:14px; line-height:1.8;'>
+    <b>1. Walk / Nadaka / सैर:</b> Roju muppay nimishalu / Daily thirty minutes / रोज़ तीस मिनट<br>
+    <b>2. Yoga / Yogam / योग:</b> Roju padihenu nimishalu / Daily fifteen minutes / रोज़ पंद्रह मिनट<br>
+    <b>3. Neeru / Water / पानी:</b> Roju moodu liters / Three liters daily / रोज़ तीन लीटर<br>
+    <b>4. Nidra / Sleep / नींद:</b> Enimidi gantalu / Eight hours / आठ घंटे<br>
+    <b>5. Food Time / Samayam / समय:</b> Time ki tinali / Eat on time / समय पर खाएं<br>
+    <b>6. Clean / Shubhrata / स्वच्छता:</b> Chethulu kadukkondi / Wash hands / हाथ धोएं<br>
+    <b>7. No Bad Habits / Alavatlu Vaddu / बुरी आदतें नहीं:</b> Smoking vaddu / No smoking / धूम्रपान नहीं<br>
+    <b>8. Happy Mind / Santosham / खुश रहें:</b> Tension vaddu / No tension / टेंशन नहीं<br><br>
+    Mee aarogyam me chethilo undi / Your health is in your hands / आपका स्वास्थ्य आपके हाथ में है
+    </p>
     </div>
     """, unsafe_allow_html=True)
-
 elif feature == "🚨 Emergency 108":
     st.markdown("<div class='beauty-card' style='border-left:6px solid red;'><h3 style='color:red; text-align:center;'>🚨 Emergency 108</h3><p style='line-height:2;'>🚑 108 - Ambulance<br>🚓 100 - Police<br>🔥 101 - Fire<br>🏥 Tiruvuru Govt Hospital - 24/7<br>👶 104 - Health Helpline<br><br>Namaste garu, emergency lo bayapadakandi, ventane call cheyandi.</p></div>", unsafe_allow_html=True)
 
