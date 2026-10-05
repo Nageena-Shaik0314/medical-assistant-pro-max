@@ -127,18 +127,31 @@ elif feature == "💊 Medicine Info & Diet":
     st.markdown("<div class='beauty-card'><h3 style='text-align:center; color:#00C9FF;'>💊 Medicine Info</h3><p>Dolo 650 - Fever, headache - After food<br>Cetzine - Cold allergy - Night 1<br>Gelusil - Gas acidity - After food<br>Cyclopam - Stomach cramp - After food<br>Vomikind 4mg - Vomiting - Under tongue<br>ORS - 1 pkt in 1L water<br>Pan 40 - Morning empty stomach<br><br><i>Note garu: Doctor ni adigi vesukondi.</i></p></div>", unsafe_allow_html=True)
     st.markdown("""
     <div class='beauty-card' style='margin-top:15px; border-color:#92FE9D;'>
-        <h3 style='text-align:center; color:#92FE9D;'>🥗 Diet Plan - Thine Vishayam</h3>
-        <p style='font-size:14px; line-height:1.8;'>
-        Namaste, thine vishayam lo koncham jagratha ga undandi.<br><br>
-        <b>Thinalsi vishayalu:</b><br>
-        - Udayam: Goruvecchi neeru + 2 kela / papaya / apple<br>
-        - Madhyanam: Annam + pappu + perugu, koncham thakkuva uppu tho<br>
-        - Sayantram: Kobbari neeru / fruit juice (no ice)<br>
-        - Rathri: 2 chapati + light curry, 9 lopu thineyandi<br><br>
-        <b>Thinakudadani vishayalu:</b><br>
-        - Bayata fry, biryani, cool drinks, ekkuva karam, maida - 5 rojulu vaddu.<br>
-        - Tea, coffee roju ki 1-2 sarlu chalu, ekkuva vaddhu.<br><br>
-        Light ga tintu unte kadupu kuda happy ga untundi, thondaraga thagguthundi.
+st.markdown("### 🥗 Diet Plan / ఆహార ప్రణాళిక / आहार योजना")
+
+st.markdown("""
+**☀️ Udayam / Morning / सुबह:**
+- Goruvecchi neeru + 2 kela
+- Luke warm water + 2 banana
+- गुनगुना पानी + 2 केले
+
+**🌞 Madhyanam / Afternoon / दोपहर:**
+- Annam + pappu + perugu, thakkuva uppu
+- Rice + dal + curd, less salt
+- चावल + दाल + दही, कम नमक
+
+**🌙 Rathri / Night / रात:**
+- 2 chapati + light curry, 9 lopu thineyandi
+- 2 chapati + light curry, before 9pm
+- 2 चपाती + हल्की सब्जी, 9 बजे से पहले
+
+**🚫 Avoid / నివారించండి / बचें:**
+- Bayata fry, biryani, cool drinks - 5 rojulu vaddu
+- Avoid outside fry, biryani, cool drinks for 5 days
+- बाहर का तला, बिरयानी, कोल्ड ड्रिंक 5 दिन तक नहीं
+""")
+
+st.success("Light ga tintu unte kadupu happy / Light food keeps stomach happy / हल्का खाना पेट को खुश रखता है")
         </p>
     </div>
     """, unsafe_allow_html=True)
