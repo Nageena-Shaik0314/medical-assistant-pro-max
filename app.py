@@ -3,8 +3,8 @@ from PIL import Image
 from gtts import gTTS
 from pydub import AudioSegment
 
-st.set_page_config(page_title="Tiruvuru Native Script Doctor", layout="wide")
-st.markdown("<h2 style='text-align:center;color:#00E5FF'>తిరువూరు AI Doctor - Native Scripts</h2>", unsafe_allow_html=True)
+st.set_page_config(page_title="AI MEDICAL ASSISTANT", layout="wide")
+st.markdown("<h2 style='text-align:center;color:#00E5FF'>AI MEDICAL ASSISTANT</h2>", unsafe_allow_html=True)
 
 def speak_sequential(te_text, hi_text, en_text):
     try:
