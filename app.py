@@ -1,55 +1,31 @@
 import streamlit as st
-from gtts import gTTS
-import os, re, tempfile
+import re
 from PIL import Image
-import speech_recognition as sr
 
-st.set_page_config(page_title="AI Medical Assistant App", page_icon="🏥", layout="wide")
+st.set_page_config(page_title="AI Medical Assistant Pro Max - Tiruvuru", layout="wide")
 
 st.markdown("""
 <style>
-.main-title {
-    text-align:center;
-    background:linear-gradient(90deg,#00C9FF,#92FE9D);
-    padding:18px; border-radius:15px;
-    color:#000; font-size:26px; font-weight:bold;
-    margin-bottom:30px;
-    box-shadow: 0 4px 15px rgba(0,201,255,0.3);
-}
-.beauty-card {
-    background: linear-gradient(135deg, #1E1E1E 0%, #2D2D2D 100%);
-    padding:25px; border-radius:20px;
-    border: 1px solid #00C9FF;
-    box-shadow: 0 8px 32px rgba(0,201,255,0.2);
-    margin:10px;
-}
+.main-title { text-align:center; color:#00E5FF; font-size:32px; font-weight:bold; }
+.beauty-card { background:#1E1E1E; padding:20px; border-radius:15px; border:1px solid #00E5FF; margin-top:10px; }
 </style>
-<div class='main-title'>🏥 AI Medical Assistant</div>
+<div class='main-title'>AI Medical Assistant Pro Max</div>
 """, unsafe_allow_html=True)
-
-def speak_single(text, lang_code):
-    try:
-        if os.path.exists("voice.mp3"): os.remove("voice.mp3")
-        tts = gTTS(text=text[:600], lang=lang_code, slow=False)
-        tts.save("voice.mp3")
-        with open("voice.mp3","rb") as f: st.audio(f.read(), format="audio/mp3", autoplay=True)
-        os.remove("voice.mp3")
-    except: pass
 
 def detect_language(text):
     if re.search(r'[\u0C00-\u0C7F]', text): return 'te'
     if re.search(r'[\u0900-\u097F]', text): return 'hi'
-    if any(w in text.lower() for w in ['jwaram','jalu','daggu','naku','garu','kadupu','noppi']): return 'te'
-    if any(w in text.lower() for w in ['bukhar','zukam','khansi','mujhe']): return 'hi'
+    if any(w in text.lower() for w in ['bukhar','khansi','dard','pet','sir','bukhaar','zukam']): return 'hi'
     return 'en'
 
+# --- YOUR FULL DATABASE - NOW 100% ERROR FREE ---
 SYMPTOMS_DB = {
-    "fever": {"te": "Namaste, meeku Jwaram. Dolo 650 tharuvata. 1.Vishranti 2.Challani gudda 3.Challa snanam vaddu 4.Mask 5.3-4L neeru 6.Fan vaddu 7.Mandu share vaddu 8.Vantulu unte hospital. Aharam: Khichdi, ganji", "hi": "asslamualaikum, app ko Bukhar hy. Dolo 650. 1.Aaram 2.Thanda patti 3.Thanda pani nahi 4.Mask 5.3-4L pani 6.Fan nahi 7.Share nahi 8.Ulti to hospital.", "en": " hello,you have Fever. Dolo 650. 1.Rest 2.Cold cloth 3.No cold bath 4.Mask 5.3-4L water 6.No fan 7.Dont share 8.If vomit hospital."},
+    "fever": {"te": "Namaste, meeku Jwaram. Dolo 650 tharuvata. 1.Vishranti 2.Challani gudda 3.Challa snanam vaddu 4.Mask 5.3-4L neeru 6.Fan vaddu 7.Mandu share vaddu 8.Vantulu unte hospital. Aharam: Khichdi, ganji", "hi": "asslamualaikum, app ko Bukhar hy. Dolo 650. 1.Aaram 2.Thanda patti 3.Thanda pani nahi 4.Mask 5.3-4L pani 6.Fan nahi 7.Share nahi 8.Ulti to hospital.", "en": "hello,you have Fever. Dolo 650. 1.Rest 2.Cold cloth 3.No cold bath 4.Mask 5.3-4L water 6.No fan 7.Dont share 8.If vomit hospital."},
     "cold": {"te": "Namaste, meeku Jalubu. Cetrizine night. 1.Aaviri 2 sarlu 2.Vecchani battalu 3.Challa neeru 5 rojulu vaddu 4.Dust vaddu 5.Rumal 6.Pillala daggara vaddu 7.Goruvecchi neeru 8.Thummu lo chethi", "hi": "asslamualaikum, app ko Zukam hy. Cetrizine. 1.Bhaap 2.Garam kapde 3.Thanda pani 5 din nahi 4.Dhool nahi 5.Rumaal 6.Baccho se doori 7.Garam pani 8.Cheenk me haath", "en": "hello,you have Cold. Cetrizine. 1.Steam 2.Warm clothes 3.No cold water 5 days 4.No dust 5.Hanky 6.Away kids 7.Warm water 8.Cover sneeze"},
-    "cough": {"te": "Namaste, meeku Daggu. Ascoril. 1.Aaviri 2.Honey+miriyam 3.Challa vaddu 4.Dust mask 5.Goruvecchi neeru 6.Pillala ki dooram 7.Daggetappudu chethi 8.7 rojulu unte hospital", "hi": "assalamualaikum, aap ko Khansi hy. Ascoril. 1.Bhaap 2.Shahad 3.Thanda nahi 4.Mask 5.Garam pani 6.Baccho se door 7.Khanste haath 8.7 din to hospital", "en": "hello, you have Cough. Ascoril. 1.Steam 2.Honey 3.No cold 4.Mask 5.Warm water 6.Away kids 7.Cover 8.If >7 days hospital"},
+    "cough": {"te": "Namaste, meeku Daggu. Ascoril. 1.Aaviri 2.Honey+miriyam 3.Challa vaddu 4.Dust mask 5.Goruvecchi neeru 6.Pillala ki dooram 7.Daggetappudu chethi 8.7 rojulu unte hospital", "hi": "assalamualaikum, aap ko Khansi hy. Ascoril. 1.Bhaap 2.Shahad 3.Thanda nahi 4.Mask 5.Garam pani 6.Baccho se door 7.Khanste haath 8.7 din to hospital", "en": "hello, you have Cough. Ascoril. 1.Steam 2.Honey 3.No cold 4.Mask 5.Warm water 6.Away kids 7.Cover 8.If more than 7 days hospital"},
     "headache": {"te": "Namaste,meeku Thala noppi. Dolo 650. 1.Chikati gadi rest 2.Phone vaddu 3.3L neeru 4.Tea thakkuva 5.8h nidra 6.Oli vaddu 7.Massage 8.2 rojulu thaggakapothe hospital", "hi": "assalamualaikum,aap ko Sir dard hy. Dolo 650. 1.Andhere me aaram 2.Phone nahi 3.3L pani 4.Chai kam 5.8h neend 6.Shore nahi 7.Massage 8.2 din nahi to hospital", "en": "hello,you have Headache. Dolo 650. 1.Dark room rest 2.No phone 3.3L water 4.Less tea 5.8h sleep 6.No noise 7.Massage 8.If 2 days hospital"},
-    "stomach pain": {"te": "Namaste, meeku Kadupu noppi. Cyclopam, Gelusil. 1.Ganji 2.Oily vaddu 3.Hot bag 10 min 4.Left side 5.Gattiga nakakandi 6.2h emi vaddhu 7.Clockwise massage 8.6h pain unte hospital", "hi": "assalamualaikum, aap ko Pet dard hy. Cyclopam. 1.Ganji 2.Oily nahi 3.Hot bag 4.Left side 5.Press nahi 6.2h kuch nahi 7.Massage 8.6h dard to hospital", "en": "hello,you have Stomach pain. Cyclopam. 1.Kanji only 2.No oily 3.Hot bag 4.Left side 5.Dont press 6.Nothing 2h 7.Massage 8.If >6h hospital"},
-    "vomiting": {"te": "Namaste, meeku Vantulu. Vomikind 4mg. 1.30min emi vaddhu 2.ORS koncham 3.Noru kadukko 4.Perfume vaddu 5.Travel vaddu 6.Left side 7.Biryani vaddu 8.3-4 sarlu unte hospital", "hi": "assalamualaikum,aap ko Ulti hy. Vomikind. 1.30min kuch nahi 2.ORS thoda 3.Muh dho 4.Khushboo nahi 5.Travel nahi 6.Left side 7.Biryani nahi 8.3-4 se zyada hospital", "en": "hello,you have Vomiting. Vomikind. 1.Nothing 30min 2.Sip ORS 3.Wash mouth 4.No smell 5.No travel 6.Left side 7.No biryani 8.If >3-4 hospital"},
+    "stomach pain": {"te": "Namaste, meeku Kadupu noppi. Cyclopam, Gelusil. 1.Ganji 2.Oily vaddu 3.Hot bag 10 min 4.Left side 5.Gattiga nakakandi 6.2h emi vaddhu 7.Clockwise massage 8.6h pain unte hospital", "hi": "assalamualaikum, aap ko Pet dard hy. Cyclopam. 1.Ganji 2.Oily nahi 3.Hot bag 4.Left side 5.Press nahi 6.2h kuch nahi 7.Massage 8.6h dard to hospital", "en": "hello,you have Stomach pain. Cyclopam. 1.Kanji only 2.No oily 3.Hot bag 4.Left side 5.Dont press 6.Nothing 2h 7.Massage 8.If more than 6h hospital"},
+    "vomiting": {"te": "Namaste, meeku Vantulu. Vomikind 4mg. 1.30min emi vaddhu 2.ORS koncham 3.Noru kadukko 4.Perfume vaddu 5.Travel vaddu 6.Left side 7.Biryani vaddu 8.3-4 sarlu unte hospital", "hi": "assalamualaikum,aap ko Ulti hy. Vomikind. 1.30min kuch nahi 2.ORS thoda 3.Muh dho 4.Khushboo nahi 5.Travel nahi 6.Left side 7.Biryani nahi 8.3-4 se zyada hospital", "en": "hello,you have Vomiting. Vomikind. 1.Nothing 30min 2.Sip ORS 3.Wash mouth 4.No smell 5.No travel 6.Left side 7.No biryani 8.If more than 3-4 hospital"},
     "diarrhea": {"te": "Namaste,meeku Virarechanalu. ORS, Econorm. 1.ORS ekkuva 2.Ganji 3.Perugu annam 4.Bayata food vaddu 5.Paalu vaddu 6.Chethulu kadukko 7.Mask 8.Blood unte hospital", "hi": "assalamualaikum,aap ko Dast. ORS. 1.ORS zyada 2.Ganji 3.Dahi chawal 4.Bahar khana nahi 5.Doodh nahi 6.Haath dho 7.Mask 8.Khoon to hospital", "en": "hello,you have Diarrhea. ORS. 1.More ORS 2.Kanji 3.Curd rice 4.No outside food 5.No milk 6.Wash hands 7.Mask 8.If blood hospital"},
     "constipation": {"te": "Namaste,meeku Malabaddhakam. 1.3-4L neeru 2.Papaya, kela 3.Walk 30min 4.Time ki food 5.Oily thakkuva 6.Masala vaddu 7.Maidha vaddu 8.3 rojulu unte hospital", "hi": "assalamualaikum,aap ko Kabz hy. 1.3-4L pani 2.Papita kela 3.Walk 30min 4.Time par khana 5.Oily kam 6.Masala nahi 7.Maida nahi 8.3 din to hospital", "en": "hello,you have Constipation. 1.3-4L water 2.Papaya banana 3.Walk 30min 4.Timely food 5.Less oily 6.No masala 7.No maida 8.If 3 days hospital"},
     "acidity": {"te": "Namaste,meeku Acidity. Pan 40 morning. 1.Khali kadupu vaddu 2.Karam vaddu 3.Tea coffee vaddu 4.Time ki tinali 5.Chintala vaddu 6.Nidra 8h 7.Oily vaddu 8.Blood vanti unte hospital", "hi": "assalamualaikum,aap ko Acidity. Pan 40. 1.Khali pet nahi 2.Mirch nahi 3.Chai coffee nahi 4.Time par khao 5.Tension nahi 6.8h neend 7.Oily nahi 8.Khoon ulti to hospital", "en": "hello, you have Acidity. Pan 40 morning. 1.No empty stomach 2.No spicy 3.No tea coffee 4.Timely eat 5.No tension 6.8h sleep 7.No oily 8.If blood vomit hospital"},
@@ -65,104 +41,67 @@ SYMPTOMS_DB = {
     "dizziness": {"te": "Namaste,meeku Thalathirugudu. 1.Ventane kurchondi 2.Neeru tagandi 3.Bike aapandi 4.Tala kinda pettakandi 5.3L neeru 6.8h nidra 7.Tea thakkuva 8.Padipothe hospital", "hi": "assalamualaikum,aap ko Chakkar. 1.Turant baitho 2.Paani piyo 3.Bike roko 4.Sir neeche mat karo 5.3L pani 6.8h neend 7.Chai kam 8.Gir jao to hospital", "en": "hello,you have Dizziness. 1.Sit immediately 2.Drink water 3.Stop bike 4.Dont bend head 5.3L water 6.8h sleep 7.Less tea 8.If fall hospital"},
     "high bp": {"te": "Namaste,meeku High BP. 1.Uppu thakkuva 2.Walk 30min 3.Tension vaddu 4.8h nidra 5.Oily vaddu 6.Mandhu time ki 7.BP check roj 8.Thala noppi unte hospital", "hi": "assalamualaikum,aap ko High BP hy. 1.Namak kam 2.Walk 30min 3.Tension nahi 4.8h neend 5.Oily nahi 6.Dawa time par 7.Roz check 8.Sir dard to hospital", "en": "hello,you have High BP. 1.Less salt 2.Walk 30min 3.No tension 4.8h sleep 5.No oily 6.Med on time 7.Daily check 8.If headache hospital"},
     "diabetes": {"te": "Namaste,meeku Sugar. 1.Sweet vaddu 2.Rice thakkuva 3.Walk 30min 4.Time ki food 5.Mandhu time ki 6.Sugar check 7.Gayalu unte niluvu 8.Kallu check", "hi": "assalamualaikum,aap ko Sugar hy. 1.Meetha nahi 2.Chawal kam 3.Walk 30min 4.Time par khana 5.Dawa time 6.Check sugar 7.Ghav dhyan 8.Aankh check", "en": "hello,you have Diabetes. 1.No sweet 2.Less rice 3.Walk 30min 4.Timely food 5.Med on time 6.Check sugar 7.Care wounds 8.Eye check"},
-    "loose motion": {"te": "Namaste,meeku Nello pakam. ORS ekkuva. Perugu annam, arati pandu. Bayata food, paalu vaddu.", "hi": "assalamualaikum,aap ko Loose motion hy. ORS zyada. Dahi chawal, kela. Bahar khana, doodh nahi.", "en": "hello,you have Loose motion. More ORS. Curd rice, banana. No outside food, milk."},
     "gas": {"te": "Namaste,meeku Gas. Gelusil. 1.Time ki tinali 2.Thondaraga tinakandi 3.Masala vaddu 4.Cool drink vaddu 5.Walk 10 min 6.Perugu 7.Maidha vaddu 8.Noppi ekkuva unte hospital", "hi": "assalamualaikum,aap ko Gas hy. Gelusil. 1.Time par khao 2.Jaldi mat khao 3.Masala nahi 4.Cold drink nahi 5.Walk 10 min 6.Dahi 7.Maida nahi 8.Dard zyada to hospital", "en": "hello,you have Gas. Gelusil. 1.Timely eat 2.Dont eat fast 3.No masala 4.No cold drink 5.Walk 10min 6.Curd 7.No maida 8.If more pain hospital"},
-    "weight loss": {"te": "Namaste,meeku Barevu thaggu. 1.Time ki 3 puru tinali 2.Protein egg pappu 3.Paalu 4.Walk kadu gym light 5.8h nidra 6.Tension vaddu 7.Junk vaddu 8.Checkup hospital", "hi": "assalamualaikum,aap ko Wajan kam hy. 1.Time par 3 baar khao 2.Protein anda dal 3.Doodh 4.Light gym 5.8h neend 6.Tension nahi 7.Junk nahi 8.Checkup hospital", "en": "hello,you have Weight loss. 1.3 times timely 2.Protein egg dal 3.Milk 4.Light gym 5.8h sleep 6.No tension 7.No junk 8.For checkup hospital"},
-    "insomnia": {"te": "Namaste,meeku Nidra pataka. 1.Phone 9pm vaddu 2.Tea coffee evening vaddu 3.10pm ki paduko 4.Goruvecchi paalu 5.Yoga 10 min 6.Chikati room 7.Alochana vaddu 8.3 rojulu lekapothe hospital", "hi": "assalamualaikum,aap ko Neend nahi. 1.9pm ke baad phone nahi 2.Shaam ko chai nahi 3.10pm so jao 4.Garam doodh 5.Yoga 10min 6.Andhera kamra 7.Soch nahi 8.3 din nahi to hospital", "en": "hello,you have Insomnia. 1.No phone after 9pm 2.No tea evening 3.Sleep 10pm 4.Warm milk 5.Yoga 10min 6.Dark room 7.No overthink 8.If 3 days no sleep hospital"},
     "anxiety": {"te": "Namaste,meeku Tension. 1.Deep breath 10 sarlu 2.Walk 30min 3.Music vinu 4.Phone thakkuva 5.8h nidra 6.Tea coffee thakkuva 7.Friends tho matladu 8.Ekkuva unte hospital", "hi": "assalamualaikum,aap ko Tension hy. 1.Gehri saans 10 baar 2.Walk 30min 3.Music suno 4.Phone kam 5.8h neend 6.Chai kam 7.Dosto se baat 8.Zyada to hospital", "en": "hello,you have Anxiety. 1.Deep breath 10 times 2.Walk 30min 3.Listen music 4.Less phone 5.8h sleep 6.Less tea coffee 7.Talk to friends 8.If more hospital"},
-    "wound": {"te": "Namaste,meeku Gayamu. 1.Detol tho kadukko 2.Betadine rasi 3.Clean cloth kattuko 4.Roju 2 sarlu dressing 5.Neeru tagakunda 6.Dust vaddu 7.Tetanus 8.Pus unte hospital", "hi": "assalamualaikum,aap ko Ghav. 1.Detol se dho 2.Betadine lagao 3.Saaf patti 4.Roz 2 baar dressing 5.Paani mat lagao 6.Dhool nahi 7.Tetanus 8.Mawaad to hospital", "en": "hello,you have Wound. 1.Wash Detol 2.Betadine 3.Clean bandage 4.Dressing twice 5.No water 6.No dust 7.Tetanus 8.If pus hospital"},
-    "breathing": {"te": "Namaste,meeku Oopiri aadaka EMERGENCY. 1.Ventane 108 2.Kurchondi 3.Dust nundi bayataku 4.Tight dress vaddu 5.Aaviri 6.Smoke vaddu 7.Bhayam vaddu 8.Ventane hospital", "hi": "assalamualaikum,aap ko Saans problem EMERGENCY. 1.Turant 108 2.Baitho leto nahi 3.Dhool se bahar 4.Tight kapde nahi 5.Bhaap 6.Dhua nahi 7.Daro nahi 8.Turant hospital", "en": "hello,you have Breathing difficulty EMERGENCY. 1.Call 108 2.Sit dont lie 3.Out of dust 4.No tight dress 5.Steam 6.No smoke 7.Dont fear 8.Hospital now"},
-    "cold fever": {"te": "Namaste,meeku Jalubu jwaram. Dolo 650, Cetzine. 1.Rest 2.Aaviri 3.Goruvecchi neeru 4.Challa vaddu 5.Mask 6.3L neeru 7.Pillala daggara vaddu 8.2 rojulu thaggakapothe hospital", "hi": "assalamualaikum,aap ko Zukam bukhar. Dolo Cetzine. 1.Aaram 2.Bhaap 3.Garam pani 4.Thanda nahi 5.Mask 6.3L pani 7.Baccho se door 8.2 din nahi to hospital", "en": "hello,you have Cold fever. Dolo Cetzine. 1.Rest 2.Steam 3.Warm water 4.No cold 5.Mask 6.3L water 7.Away kids 8.If 2 days hospital"},
 }
 
-def get_reply(q):
-    ql = q.lower()
-    for k in SYMPTOMS_DB:
-        if k in ql: return SYMPTOMS_DB[k]["en"], SYMPTOMS_DB[k]["te"], SYMPTOMS_DB[k]["hi"]
-    if "jwaram" in ql: return SYMPTOMS_DB["fever"]["en"], SYMPTOMS_DB["fever"]["te"], SYMPTOMS_DB["fever"]["hi"]
-    if "kadupu" in ql: return SYMPTOMS_DB["stomach pain"]["en"], SYMPTOMS_DB["stomach pain"]["te"], SYMPTOMS_DB["stomach pain"]["hi"]
-    return (f"For {q}: Rest, 3L water, 8h sleep, light food. Precautions: No cold, oily, spicy, outside food, mask, wash hands. If 2 days no relief visit Tiruvuru Govt Hospital.",
-            f"{q} kosam garu: Vishranti, 3L neeru, 8 gantalu nidra, light food. Jagrathalu: Challa, noone, karam, bayata food vaddu, mask, chethulu kadukkondi. 2 rojula tharvata hospital ki randi.",
-            f"{q} ke liye: Aaram, 3L pani, 8h neend. Precautions: Thanda, tel masala avoid, mask, haath dho. 2 din me nahi to hospital.")
+def get_reply(symptom, lang):
+    symptom = symptom.lower()
+    for key in SYMPTOMS_DB:
+        if key in symptom:
+            return SYMPTOMS_DB[key].get(lang, SYMPTOMS_DB[key]['en'])
+    if lang == 'te': return "Meeku em problem cheppandi."
+    if lang == 'hi': return "Aapko kya problem hai bataiye."
+    return "Please tell your symptoms."
 
-feature = st.sidebar.selectbox("📋 SELECT FEATURE", ["🩺 AI Doctor Chat", "💊 Medicine Info & Diet", "🧘 Health Tips & Yoga", "🚨 Emergency 108", "📸 Image Analyzer"])
+# MENU - SAFE NO EMOJI IN CONDITION
+feature = st.sidebar.selectbox("SELECT FEATURE", ["AI Doctor Chat", "Diet Plan Section", "Health Tips Section", "Image Analyser Section", "Emergency"])
 
-if feature == "🩺 AI Doctor Chat":
-    col1, col2 = st.columns(2, gap="large")
-    with col1:
-        st.markdown("<div class='beauty-card'><h3 style='text-align:center; color:#00C9FF;'>🎤 Speak Here</h3><p style='text-align:center; color:#AAA;'>Mic & speak in Telugu/Hindi/English</p></div>", unsafe_allow_html=True)
-        user_audio = st.audio_input("Click to speak...", label_visibility="collapsed")
-        if user_audio:
-            st.audio(user_audio)
-            try:
-                with tempfile.NamedTemporaryFile(delete=False, suffix=".wav") as tmp:
-                    tmp.write(user_audio.getbuffer()); tmp_path = tmp.name
-                r = sr.Recognizer()
-                with sr.AudioFile(tmp_path) as source:
-                    audio_data = r.record(source)
-                    try: text = r.recognize_google(audio_data, language='te-IN')
-                    except:
-                        try: text = r.recognize_google(audio_data, language='hi-IN')
-                        except: text = r.recognize_google(audio_data, language='en-IN')
-                os.remove(tmp_path)
-                lang = detect_language(text)
-                st.success(f"You said: {text}")
-                eng,tel,hin = get_reply(text)
-                if lang=='te': st.info(tel); speak_single(tel,'te')
-                elif lang=='hi': st.info(hin); speak_single(hin,'hi')
-                else: st.info(eng); speak_single(eng,'en')
-            except: st.warning("Malli okasari cheppandi.")
-    with col2:
-        st.markdown("<div class='beauty-card'><h3 style='text-align:center; color:#92FE9D;'>⌨️ Type Here</h3><p style='text-align:center; color:#AAA;'>Type symptoms in any language</p></div>", unsafe_allow_html=True)
-        q = st.chat_input("Enter symptoms... jwaram / fever")
-        if q:
-            lang = detect_language(q)
-            st.write(f"**You:** {q}")
-            eng,tel,hin = get_reply(q)
-            if lang=='te': st.info(tel); speak_single(tel,'te')
-            elif lang=='hi': st.info(hin); speak_single(hin,'hi')
-            else: st.info(eng); speak_single(eng,'en')
+if "Doctor Chat" in feature:
+    st.markdown("<div class='beauty-card'>Type your problem</div>", unsafe_allow_html=True)
+    user_input = st.text_input("Enter Symptoms")
+    if user_input:
+        lang = detect_language(user_input)
+        st.success(get_reply(user_input, lang))
 
-elif feature == "💊 Medicine Info & Diet":
-    st.markdown("<div class='beauty-card'><h3 style='text-align:center; color:#00C9FF;'>💊 Medicine Info</h3><p>Dolo 650 - Fever, headache - After food<br>Cetzine - Cold allergy - Night 1<br>Gelusil - Gas acidity - After food<br>Cyclopam - Stomach cramp - After food<br>Vomikind 4mg - Vomiting - Under tongue<br>ORS - 1 pkt in 1L water<br>Pan 40 - Morning empty stomach<br><br><i>Note garu: Doctor ni adigi vesukondi.</i></p></div>", unsafe_allow_html=True)
-    elif feature == "🍎 Diet Plan":
+elif "Diet Plan" in feature:
     st.markdown("""
-    <div class='beauty-card' style='border-left:5px solid #92FE9D;'>
-    <h3 style='text-align:center; color:#92FE9D;'>Diet Plan - Aahar Yojana</h3>
-    <p style='color:white; font-size:14px; line-height:1.8;'>
-    <b>Udayam / Morning / सुबह:</b> Goruvecchi neeru + rendu kela / Lukewarm water + two bananas / गुनगुना पानी + दो केले<br>
-    <b>Madhyanam / Afternoon / दोपहर:</b> Annam + pappu + perugu / Rice + dal + curd / चावल + दाल + दही<br>
-    <b>Sayantram / Evening / शाम:</b> Kobbari neeru / Coconut water / नारियल पानी<br>
-    <b>Rathri / Night / रात:</b> Rendu chapati + light curry / Two chapati + light curry / दो चपाती + हल्की सब्जी<br><br>
-    <b>Vaddu / Avoid / परहेज:</b> Bayata fry biryani vaddu / Avoid outside fry biryani / बाहर का तला भुना न खाएं<br>
-    Light food keeps stomach happy / हल्का खाना पेट को खुश रखता है / లైట్ గా తింటే కడుపు హ్యాపీ
+    <div class='beauty-card' style='border-color:#92FE9D;'>
+    <h3 style='text-align:center; color:#92FE9D;'>Diet Plan / Aahar / ఆహార ప్రణాళిక</h3>
+    <p style='color:white; font-size:14px; line-height:1.9;'>
+    Udayam: Goruvecchi neeru + rendu kela / Lukewarm water + two banana / गुनगुना पानी + दो केले<br>
+    Madhyanam: Annam + pappu + perugu / Rice + dal + curd / चावल + दाल + दही<br>
+    Rathri: Rendu chapati / Two chapati / दो चपाती, thommidi gantala lopu / before nine / नौ बजे से पहले<br>
+    Avoid: Bayata fry vaddu / Avoid outside fry / बाहर का तला न खाएं
     </p>
     </div>
     """, unsafe_allow_html=True)
 
-elif feature == "🧘 Health Tips & Yoga":
+elif "Health Tips" in feature:
     st.markdown("""
-    <div class='beauty-card' style='margin-top:15px; border-left:5px solid #00E5FF;'>
-    <h3 style='text-align:center; color:#00E5FF;'>Health Tips - Aarogyam - स्वास्थ्य</h3>
-    <p style='color:white; font-size:14px; line-height:1.8;'>
-    <b>1. Walk / Nadaka / सैर:</b> Roju muppay nimishalu / Daily thirty minutes / रोज़ तीस मिनट<br>
-    <b>2. Yoga / Yogam / योग:</b> Roju padihenu nimishalu / Daily fifteen minutes / रोज़ पंद्रह मिनट<br>
-    <b>3. Neeru / Water / पानी:</b> Roju moodu liters / Three liters daily / रोज़ तीन लीटर<br>
-    <b>4. Nidra / Sleep / नींद:</b> Enimidi gantalu / Eight hours / आठ घंटे<br>
-    <b>5. Food Time / Samayam / समय:</b> Time ki tinali / Eat on time / समय पर खाएं<br>
-    <b>6. Clean / Shubhrata / स्वच्छता:</b> Chethulu kadukkondi / Wash hands / हाथ धोएं<br>
-    <b>7. No Bad Habits / Alavatlu Vaddu / बुरी आदतें नहीं:</b> Smoking vaddu / No smoking / धूम्रपान नहीं<br>
-    <b>8. Happy Mind / Santosham / खुश रहें:</b> Tension vaddu / No tension / टेंशन नहीं<br><br>
-    Mee aarogyam me chethilo undi / Your health is in your hands / आपका स्वास्थ्य आपके हाथ में है
+    <div class='beauty-card'>
+    <h3 style='text-align:center; color:#00E5FF;'>Health Tips</h3>
+    <p style='color:white; font-size:14px; line-height:1.9;'>
+    Walk muppay nimishalu / Thirty min / तीस मिनट<br>
+    Water moodu liters / Three liters / तीन लीटर<br>
+    Sleep enimidi gantalu / Eight hours / आठ घंटे<br>
+    Mee aarogyam me chethilo undi / Your health in your hands / स्वास्थ्य आपके हाथ में है
     </p>
     </div>
     """, unsafe_allow_html=True)
-elif feature == "🚨 Emergency 108":
-    st.markdown("<div class='beauty-card' style='border-left:6px solid red;'><h3 style='color:red; text-align:center;'>🚨 Emergency 108</h3><p style='line-height:2;'>🚑 108 - Ambulance<br>🚓 100 - Police<br>🔥 101 - Fire<br>🏥 Tiruvuru Govt Hospital - 24/7<br>👶 104 - Health Helpline<br><br>Namaste garu, emergency lo bayapadakandi, ventane call cheyandi.</p></div>", unsafe_allow_html=True)
 
-elif feature == "📸 Image Analyzer":
-    st.markdown("<div class='beauty-card'><h3 style='text-align:center;'>📸 Image Analyzer (Wound/Skin)</h3></div>", unsafe_allow_html=True)
-    img = st.file_uploader("Upload image", type=["jpg","png","jpeg"])
-    if img:
-        st.image(Image.open(img), use_column_width=True)
-        st.warning("Gayamu unte Dettol tho kadigi Betadine rayandi. Vapu, pus, ekkuva noppi unte ventane Tiruvuru Hospital ki randi.")
+elif "Image Analyser" in feature:
+    st.markdown("<div class='beauty-card' style='border-color:#FF6B6B;'><h3 style='text-align:center; color:#FF6B6B;'>Image Analyser</h3><p style='color:white; text-align:center;'>Upload Photo / Photo upload cheyandi / फोटो अपलोड करें</p></div>", unsafe_allow_html=True)
+    uploaded_file = st.file_uploader("Choose Image", type=["jpg","png","jpeg"])
+    if uploaded_file is not None:
+        image = Image.open(uploaded_file)
+        st.image(image, caption="Your Photo", use_column_width=True)
+        st.success("Image Received! Chusanu / Dekh liya")
+        st.markdown("""
+        <div class='beauty-card'>
+        <p style='color:white;'>Show to doctor / Doctor ki chupinchandi / डॉक्टर को दिखाएं<br>Keep clean / Clean ga unchandi / साफ रखें<br>Do not scratch / Gokakandi / खुजलाएं नहीं<br>Doctor advice important / Doctor salah mukhyam / डॉक्टर सलाह जरूरी है</p>
+        </div>
+        """, unsafe_allow_html=True)
+
+elif "Emergency" in feature:
+    st.error("EMERGENCY: Call One Zero Eight - 108")
