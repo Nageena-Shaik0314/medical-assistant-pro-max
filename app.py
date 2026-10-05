@@ -130,22 +130,22 @@ elif feature == "💊 Medicine Info & Diet":
 st.markdown("### 🥗 Diet Plan / ఆహార ప్రణాళిక / आहार योजना")
 
 st.markdown("""
-**☀️ Udayam / Morning / सुबह:**
+** Udayam / Morning / सुबह:**
 - Goruvecchi neeru + 2 kela
 - Luke warm water + 2 banana
 - गुनगुना पानी + 2 केले
 
-**🌞 Madhyanam / Afternoon / दोपहर:**
+** Madhyanam / Afternoon / दोपहर:**
 - Annam + pappu + perugu, thakkuva uppu
 - Rice + dal + curd, less salt
 - चावल + दाल + दही, कम नमक
 
-**🌙 Rathri / Night / रात:**
+** Rathri / Night / रात:**
 - 2 chapati + light curry, 9 lopu thineyandi
 - 2 chapati + light curry, before 9pm
 - 2 चपाती + हल्की सब्जी, 9 बजे से पहले
 
-**🚫 Avoid / నివారించండి / बचें:**
+** Avoid / నివారించండి / बचें:**
 - Bayata fry, biryani, cool drinks - 5 rojulu vaddu
 - Avoid outside fry, biryani, cool drinks for 5 days
 - बाहर का तला, बिरयानी, कोल्ड ड्रिंक 5 दिन तक नहीं
